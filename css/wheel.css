@@ -1,0 +1,99 @@
+
+.wheel {
+  text-align: center;
+}
+.wheel__title,
+.prize__title {
+  margin-bottom: 0.8em;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.wheel__wrapper {
+  padding: 1.5em;
+  border: 2px solid #c82333;
+  margin: 2em 0;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+.order__title {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+.wheel__pic {
+  position: relative;
+}
+.prize-wheel {
+  -webkit-transition: 4s;
+  -o-transition: 4s;
+  transition: 4s;
+}
+.wheel__cursor {
+  width: 158px;
+  height: 158px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+@media (max-width: 500px) {
+  .wheel__cursor {
+    width: 130px;
+    height: 130px;
+  }
+}
+.wheel__cursor-text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: absolute;
+  top: 49%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 45%;
+  height: 45%;
+  border-radius: 100%;
+  background-color: #fff;
+  -webkit-box-shadow: white 0 -2px 0 inset, white 0 2px 0 inset,
+    rgba(0, 0, 0, 0.4) 0 0 5px;
+  box-shadow: white 0 -2px 0 inset, white 0 2px 0 inset,
+    rgba(0, 0, 0, 0.4) 0 0 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.spin {
+  -webkit-animation: spin 7s ease-in-out forwards;
+  animation: spin 7s ease-in-out forwards;
+}
+@-webkit-keyframes spin {
+  70% {
+    -webkit-transform: rotate(1783deg);
+    transform: rotate(1783deg);
+  }
+  100% {
+    -webkit-transform: rotate(1774deg);
+    transform: rotate(1774deg);
+  }
+}
+@keyframes spin {
+  70% {
+    -webkit-transform: rotate(1783deg);
+    transform: rotate(1783deg);
+  }
+  100% {
+    -webkit-transform: rotate(1774deg);
+    transform: rotate(1774deg);
+  }
+}
