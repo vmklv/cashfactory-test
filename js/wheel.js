@@ -28,9 +28,53 @@ $(".btn--submit").click((function() {
 }
 ));
 var resultWrapper = document.querySelector(".overlay")
-  , wheel = document.querySelector(".prize-wheel");
+  , wheel = document.querySelector(".prize-wheel")
+  , wheelWrapper = document.querySelector(".wheel__wrapper")
+  , timerSpan = document.querySelector(".in-timer-new-bl .time");
+
+function getEndsAt() {
+    var v = localStorage.getItem("wheelEndsAt");
+    return v ? parseInt(v, 10) : 0;
+}
+
+function isTimerActive() {
+    return getEndsAt() > Date.now();
+}
+
+function startPersistentTimer(endTs) {
+    if (!timerSpan) return;
+    function render() {
+        var now = Date.now();
+        var diff = Math.max(0, Math.floor((endTs - now) / 1000));
+        var m = Math.floor(diff / 60);
+        var s = diff % 60;
+        timerSpan.textContent = (m < 10 ? "0" + m : m) + " " + (s < 10 ? "0" + s : s);
+        if (diff <= 0) {
+            clearInterval(iid);
+            localStorage.removeItem("wheelEndsAt");
+            // Show wheel again when timer ends
+            $(".wheel__wrapper").slideDown();
+        }
+    }
+    render();
+    var iid = setInterval(render, 1000);
+}
+
+// On load: if timer active, hide wheel and show form + run timer
+if (isTimerActive()) {
+    $(".wheel__wrapper").hide();
+    $(".order").show();
+    startPersistentTimer(getEndsAt());
+}
 $(".wheel__cursor").click((function() {
+    if (isTimerActive()) return; // Prevent during active timer
     wheel.classList.contains("rotated") || (wheel.classList.add("spin"),
+    // Start 10-minute persistent countdown
+    (function(){
+        var endsAt = Date.now() + 10 * 60 * 1e3;
+        localStorage.setItem("wheelEndsAt", String(endsAt));
+        startPersistentTimer(endsAt);
+    })(),
     setTimeout((function() {
         resultWrapper.style.display = "block"
     }
@@ -133,6 +177,23 @@ $(".policy-close").click((function() {
 }
 )),
 $((function() {
+    // Float labels on focus/value for form inputs
+    function updateFieldState(input) {
+        var $inp = $(input);
+        var $wrap = $inp.closest('.field-gkk');
+        if (!$wrap.length) return;
+        if ($inp.is(':focus') || ($inp.val() && String($inp.val()).trim() !== '')) {
+            $wrap.addClass('act-gkk');
+        } else {
+            $wrap.removeClass('act-gkk');
+        }
+    }
+    $(document).on('focus input change blur', '.field-gkk input', function(){
+        updateFieldState(this);
+    });
+    // initialize on load
+    $('.field-gkk input').each(function(){ updateFieldState(this); });
+
     $("#calcweight").click((function(e) {
         e.preventDefault(),
         e = Math.ceil(Number($("#minus_weight").val()) / .666666),

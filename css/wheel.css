@@ -17,6 +17,7 @@
     0 0 0 1px rgba(0, 0, 0, 0.05);
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
+.order { display: none; }
 .order__title {
   font-size: 1.1em;
   font-weight: bold;
@@ -72,6 +73,69 @@
     rgba(0, 0, 0, 0.4) 0 0 5px;
   text-transform: uppercase;
   font-weight: bold;
+}
+
+/* Prize overlay/popup */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+}
+.popup {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 2.9em 0.5em 1em 0.5em;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  -webkit-animation: toUp 1s ease 0.2s forwards;
+  animation: toUp 1s ease 0.2s forwards;
+}
+@media (min-width: 320px) {
+  .popup { font-size: calc(0.0070175439 * 100vw + 15.7543859649px); }
+}
+@media (min-width: 1460px) {
+  .popup { font-size: 26px; }
+}
+@media (max-width: 700px) {
+  .popup { width: 90%; max-width: 90%; }
+}
+.popup__body { min-width: 300px; }
+.popup__title { font-size: 1.5em; margin-bottom: 0.5em; }
+.popup__text { padding-bottom: 1em; }
+.popup__icon { position: absolute; top: -50px; left: 50%; transform: translateX(-50%); width: 4.2em; height: 4.2em; border-radius: 100%; color: #fff; }
+.popup__icon.prize { background-color: #23c85d; }
+.popup__icon.prize:before { content: ""; position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); width: 2.2em; height: 1.1em; border-left: 3px solid; border-bottom: 3px solid; }
+@-webkit-keyframes toUp { 100% { top: 50%; } }
+@keyframes toUp { 100% { top: 50%; } }
+.btn { display: inline-block; font-size: 1em; color: #fff; padding: 0.5em 1em; border: none; border-radius: 5px; background: #4fc732; border-bottom: 3px solid #389620; cursor: pointer; text-decoration: none; }
+.btn--submit { font-size: 1.2em; }
+.accent { color: #0599ee; }
+.close-popup {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+.btn-popup {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 16px;
+  background: #23c85d;
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  padding: 0.5em 1em;
 }
 .spin {
   -webkit-animation: spin 7s ease-in-out forwards;

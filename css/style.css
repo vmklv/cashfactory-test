@@ -12,6 +12,11 @@ body {
   background: #efefef;
 }
 
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
 .b-all-conteiner {
   overflow: hidden;
   max-width: 1920px;
@@ -717,7 +722,7 @@ a {
     padding: 62px 45px 45px 48px;
   }
   .b-not-prod {
-    width: 520px;
+    width: 320px;
     display: inline-block;
     vertical-align: top;
     margin: 0;
